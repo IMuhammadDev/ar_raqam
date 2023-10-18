@@ -52,6 +52,10 @@ MIDDLEWARE = [
     "rest_framework",
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 ROOT_URLCONF = "ar_raqam.urls"
 
 TEMPLATES = [
@@ -78,8 +82,11 @@ WSGI_APPLICATION = "ar_raqam.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ar-raqam",
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": "ikrom.may",
     }
 }
 
