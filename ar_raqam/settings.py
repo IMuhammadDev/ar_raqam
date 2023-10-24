@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar",
+    "django_filters",
+    "rest_framework",
+    "allauth",
+    "allauth.account",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
     "core",
     "projects",
     "posts",
@@ -47,9 +54,6 @@ INSTALLED_APPS = [
     "services",
     "common",
     "industries",
-    "debug_toolbar",
-    "django_filters",
-    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -60,10 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django_filters",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "rest_framework",
-    "rest_framework_simplejwt.token_blacklist",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 INTERNAL_IPS = [
@@ -147,10 +148,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -168,3 +171,17 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = "core.User"
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin
+    "django.contrib.auth.backends.ModelBackend",
+    # Allauth specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
