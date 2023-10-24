@@ -39,6 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "core",
+    "projects",
+    "posts",
+    "portfolios",
+    "quotes",
+    "services",
+    "common",
+    "industries",
     "debug_toolbar",
     "django_filters",
     "rest_framework",
@@ -53,7 +61,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_filters",
-    "debug_toolbar",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
 ]
@@ -158,3 +166,5 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
 }
+
+AUTH_USER_MODEL = "core.User"
